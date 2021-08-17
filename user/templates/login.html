@@ -1,0 +1,127 @@
+{% extends 'public.html' %}
+{% block public_title %}我的博客|登录{% endblock %}
+{% block login_active %}active{% endblock %}
+{% block public %}
+    <div>
+        {% if request.session.user_name == None %}
+            <h3 style="text-align: center"><a id="account" style="text-decoration:underline;" href="javascript:void(0)">账号登录</a>|<a
+                    id="phone" href="javascript:void(0)">手机号登录</a>{{ prompt }}</h3>
+            <form id="account-login"  class="form-horizontal" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2  col-sm-offset-2 control-label">用户名：</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="username" class="form-control" id="inputEmail3" placeholder="请输入用户名"
+                               required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 col-sm-offset-2 control-label">密码：</label>
+                    <div class="col-sm-4">
+                        <input type="password" name="password" class="form-control" id="inputPassword3"
+                               placeholder="请输入密码"
+                               required>
+                    </div>
+                </div>
+                <p class="text-danger public-center"> {{ message }}</p>
+                <div class="form-group public-center">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <button type="submit" class="btn btn-default">登录</button>
+                    </div>
+                </div>
+            </form>
+            <form id="phone-login" style="display: none"  class="form-horizontal" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="tel" class="col-sm-2 col-sm-offset-2 control-label">手机号：</label>
+                    <div class="col-sm-4">
+                        <input type="tel" name="tel" class="form-control" id="tel" placeholder="请输入用户名"
+                               required>
+                        <small id="telHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="col-sm-2" style="height: 28px;margin-top: 0.5em;">
+                        <a href="javascript:void(0)" onmousedown="get_code()"
+                           style="text-decoration:none"
+                           id="get-code">
+                            获取验证码</a>
+                    </div>
+                    <script>
+                        var count = 60
+
+                        function get_time() {
+                            if (count === 1) {
+                                count = 60
+                                $('#get-code').text('重新发送验证码!')
+                                $('#get-code').attr('onmousedown', 'get_code()') //添加点击元素
+                                return;
+                            } else {
+                                count--;
+                                $('#get-code').text('倒计时(' + count + ')')
+                                $('#get-code').removeAttr('onmousedown') //移除点击元素
+                            }
+                            setTimeout(function () {
+                                get_time()
+                            }, 1000)
+                        }
+
+                        function get_code() {
+                            var tel = $('#tel').val()
+                            var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/
+                            if (!myreg.test(tel)) {
+                                $('#telHelp').text('手机号输入错误，请重新输入!')
+                            } else {
+                                $('#telHelp').text('')
+                                //手机号发送，获取验证码
+                                $.ajax({
+                                    url: '{% url 'login_phone_val' %}',
+                                    method: 'post',
+                                    cache: false,
+                                    data: {tel: tel},
+                                    success: function (msg) {
+                                        if (msg.result == '0') {
+                                            $('#telHelp').text('验证码发送成功')
+                                            get_time()
+                                        } else {
+                                            $('#telHelp').text('手机号未注册')
+                                        }
+                                    },
+                                    error: function (xhr) {
+                                    }
+                                })
+                            }
+                        }
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 col-sm-offset-2 control-label">验证码：</label>
+                    <div class="col-sm-4">
+                        <input type="password" name="code" class="form-control" id="inputPassword3"
+                               placeholder="请输入验证码"
+                               required>
+                    </div>
+                </div>
+                <p class="text-danger public-center"> {{ message }}</p>
+                <div class="form-group public-center">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <button type="submit" class="btn btn-default">登录</button>
+                    </div>
+                </div>
+            </form>
+        {% else %}
+            <div class="public-center">当前用户已登录请前往博客页面</div>
+        {% endif %}
+    </div>
+    <script>
+        $('#account').click(function () {
+            $('#account').attr('css','text-decoration:underline;')
+            $('#account-login').show()
+            $('#phone-login').hide()
+        })
+        $('#phone').click(function () {
+            $('#account').removeAttr('style')
+            $('#phone').attr('css','text-decoration:underline;')
+            $('#account-login').hide()
+            $('#phone-login').show()
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'public.html' %}
+{% block public_css_js %}
+    <link rel="stylesheet" href="/static/css/blog_write.css">
+{% endblock %}
+{% block public_title %}
+    我的博客|信息修改
+{% endblock %}
+{% block public %}
+    <div style="padding-top: 1em">
+        <form id="form_btn" method="post" class="form-horizontal col-sm-offset-4" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">用户名<span
+                        style="color: red">*</span>：</label>
+                <div class="col-sm-3">
+                    <input required name="username" class="form_write" value="{{ user.name }}" type="text" id="username"
+                           placeholder="请输入用户名" readonly>
+                    <span id="usernameState" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nickname" class="col-sm-2 control-label">昵称：</label>
+                <div class="col-sm-3">
+                    <input name="nickname" class="form_write" type="text" id="nickname"
+                           value="{{ user.nickname }}" placeholder="请输入昵称" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tel" class="col-sm-2 control-label">手机号：</label>
+                <div class="col-sm-3">
+                    <input name="tel" class="form_write" type="tel" id="tel"
+                           value="{{ user.phone }}" placeholder="请输入手机号" required>
+                    <span id="telState" class=""></span>
+                    <small id="telHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="col-sm-2" style="height: 28px;">
+                    <a href="javascript:void(0)" onmousedown="get_code()"
+                       style="text-decoration:none"
+                       id="get-code">
+                        获取验证码</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="code" class="col-sm-2 control-label">验证码：</label>
+                <div class="col-sm-3">
+                    <input name="code" onblur="put_code()" class="form_write" type="tel" id="code" placeholder="请输入验证码"
+                           required>
+                    <span id="codeState" class=""></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">电子邮件：</label>
+                <div class="col-sm-3">
+                    <input name="email" class="form_write" type="email" id="email"
+                           value="{{ user.email }}" placeholder="请输入电子邮件" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile" class="col-sm-2 control-label">头像：</label>
+                <div class="col-sm-2">
+                    <input type="file" id="exampleInputFile" value="{{ user.imagepath }}" class="hidden"
+                           name="headportrait"
+                           accept="image/*">
+                    <img id="img-circle" src="{{ user.imagepath }}" alt="头像" class="img-circle"
+                         style="width: 40px;height: 40px">
+                    <a href="javascript:void(0)" id="replace">更换</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <p  style="text-align: right" id="span_text" class="text-danger ">{{ message }}</p>
+                    <button type="button" class="btn btn-default pull-right" onclick="exit()"
+                            style="margin-right: 10px">退出
+                    </button>
+                    <button type="submit" id="btn" class="btn btn-default pull-right" style="margin-right: 10px">修改
+                    </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        var code_send = '{% url 'code_send' %}'
+        var code_val = '{% url 'code_val' %}'
+        $(document).ready(function () {
+            var file = document.getElementById('exampleInputFile');
+            $('#replace').click(function () {
+                file.click()
+            })
+            file.onchange = function () {
+                var fileData = this.files[0];//获取到一个FileList对象中的第一个文件( File 对象),是我们上传的文件
+                var pettern = /^image/;
+                console.info(fileData.type)
+                if (!pettern.test(fileData.type)) {
+                    alert("图片格式不正确");
+                    return;
+                }
+                var reader = new FileReader();
+                reader.readAsDataURL(fileData);//异步读取文件内容，结果用data:url的字符串形式表示
+                /*当读取操作成功完成时调用*/
+                reader.onload = function (e) {
+                    console.log(e); //查看对象
+                    console.log(this.result);//要的数据 这里的this指向FileReader（）对象的实例reader
+                    $('#img-circle').attr("src", this.result)
+                    $('#exampleInputFile').attr("value", '1')
+                }
+            }
+        })
+
+        function exit() {
+            window.location.href = '{% url 'home' %}'
+        }
+    </script>
+    <script type="text/javascript" src="/static/js/register.js"></script>
+{% endblock %}

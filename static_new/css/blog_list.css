@@ -1,0 +1,23 @@
+.bloglist_span {
+    display: inline-block;
+    padding: 0.5em 1em 0em 0em;
+}
+
+.page-div {
+    padding-bottom: 2em;
+}
+
+.nav-pills {
+    position: fixed;
+}
+
+.target-fix {
+    display: block;
+    position: relative;
+    top: -65px;
+}
+
+.a-btn:visited {
+    color: red;
+}
+

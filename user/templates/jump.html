@@ -1,0 +1,26 @@
+{% extends 'public.html' %}
+{% block public_title %}我的博客|跳转{% endblock %}
+{% block public %}
+    <div class="public-center">
+        注册成功页面将在<span class="timeover text-danger">3</span>秒之后跳转致登录页面
+    </div>
+    <script type="text/javascript">
+        var count = 3;
+        var from = '{{ from }}'
+        var html
+        if (from == 'None') {
+            html = '../login'
+        } else {
+            html = '../login' + '?from=' + from
+        }
+
+        setInterval(function () {
+            count--;
+            if (count < 0) {
+                window.location.href = html
+                return;
+            }
+            $(".timeover").text(count)
+        }, 1000)
+    </script>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'public.html' %}
+{% block public_css_js %}
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script type="text/javascript" src="/static/echarts/echarts.min.js"></script>
+    <link rel="stylesheet" href="/static/css/calendar.css">
+{% endblock %}
+{% block home_active %}
+    active
+{% endblock %}
+{% block public_title %}
+    我的博客|首页
+{% endblock %}
+{% block public %}
+    <div class="row">
+        <div class="col-lg-4  visible-lg-block">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">阅读量</h3>
+                </div>
+                <div class="panel-body">
+                    <button class="btn btn-primary" type="button">
+                        今天 <span class="badge">4</span>
+                    </button>
+                    <button class="btn btn-primary label-default" type="button">昨天<span class="badge">10</span></button>
+                    <button class="btn btn-primary label-success" type="button">近七天<span class="badge">100</span>
+                    </button>
+                    <button class="btn btn-primary label-info" type="button">近30天<span class="badge">300</span></button>
+                </div>
+                <div class="main" id="main" style="height:400px;"></div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3 class="public-center">欢迎访问我的网站，随便你看</h3>
+                    <div class="box" id="clock">
+                        <!-- 原点 -->
+                        <div class="origin"></div>
+                        <!-- 时钟数 -->
+                        <div class="dot_box">
+                            <div class="dot">6</div>
+                            <div class="dot">5</div>
+                            <div class="dot">4</div>
+                            <div class="dot">3</div>
+                            <div class="dot">2</div>
+                            <div class="dot">1</div>
+                            <div class="dot">12</div>
+                            <div class="dot">11</div>
+                            <div class="dot">10</div>
+                            <div class="dot">9</div>
+                            <div class="dot">8</div>
+                            <div class="dot">7</div>
+                        </div>
+                        <!-- 时、分、秒针 -->
+                        <div class="clock_line hour_line" id="hour_line"></div>
+                        <div class="clock_line minute_line" id="minute_line"></div>
+                        <div class="clock_line second_line" id="second_line"></div>
+                        <!-- 日期 -->
+                        <div class="date_info" id="date_info"></div>
+                        <!-- 时间 -->
+                        <div class="time_info">
+                            <div class="time" id="hour_time"></div>
+                            <div class="time" id="minute_time"></div>
+                            <div class="time" id="second_time"></div>
+                        </div>
+                    </div>
+                    <script type="text/javascript" src="/static/js/home.js"></script>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 visible-lg-block">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">点赞量</h3>
+                </div>
+                <div class="panel-body">
+                    <button class="btn btn-primary" type="button">今天<span class="badge">4</span>
+                    </button>
+                    <button class="btn btn-primary label-default" type="button">昨天<span class="badge">10</span></button>
+                    <button class="btn btn-primary label-success" type="button">近七天<span class="badge">100</span>
+                    </button>
+                    <button class="btn btn-primary label-info" type="button">近30天<span class="badge">300</span></button>
+                </div>
+                <div class="main" id="main1" style="height:400px;"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/static/js/bar.js"></script>
+{% endblock %}

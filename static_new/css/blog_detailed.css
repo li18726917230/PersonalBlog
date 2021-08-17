@@ -1,0 +1,51 @@
+.like {
+    color: #337ab7;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5em 0.3em;
+}
+
+.blog-more {
+    margin-top: 1em;
+}
+
+.blog-info-description {
+    list-style-type: none;
+    margin-bottom: 1em;
+}
+
+.blog-info-description li {
+    display: inline-block;
+    margin-right: 2em;
+}
+
+.comment-area {
+    margin-top: 2em;
+    overflow: hidden;
+}
+
+.comment-area-title {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.4em;
+}
+
+.btn {
+    margin-top: 5px;
+}
+
+.comment {
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.like {
+    color: #337ab7;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5em 0.3em;
+}
+
+.like .active {
+    color: #f22;
+}

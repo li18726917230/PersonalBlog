@@ -1,0 +1,101 @@
+{% extends 'public.html' %}
+{% block public_css_js %}
+    <link rel="stylesheet" href="/static/css/blog_list.css">
+{% endblock %}
+{% block public %}
+    <nav id="myScroll" class="navbar navbar-default navbar-static" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse"
+                        data-target=".bs-js-navbar-scrollspy">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse bs-js-navbar-scrollspy">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#Android">Android</a></li>
+                    <li><a href="#JAVA">JAVA</a></li>
+                    <li class="dropdown">
+                        <a href="#" id="navbar" class="dropdown-toggle"
+                           data-toggle="dropdown">
+                            其他编程 <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu"
+                            aria-labelledby="navbar">
+                            <li><a href="#PHP" tabindex="-1">PHP</a></li>
+                            <li><a href="#Bootstrap" tabindex="-1">Bootstrap</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#MySQL" tabindex="-1">MySQL</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div data-spy="scroll" data-target="#myScroll" data-offset="0"
+         style="height:200px;overflow:auto; position: relative;">
+    <div class="p">
+        <h4 id="Android">Android<small><a href="#" onclick="removeSection(this);">
+            &times; 删除该部分</a></small>
+        </h4>
+        <p>Android是一种基于Linux的自由及开放源代码的操作系统。主要使用于移动设备，如智能手机和平板电脑，由Google（谷歌）公司和开放手机联盟领导及开发。
+            系统内核
+            Android 是运行于Linux kernel之上，但并不是GNU/Linux。因为在一般GNU/Linux 里支持的功能，Android
+            大都没有支持，包括Cairo、X11、Alsa、FFmpeg、GTK、Pango及Glibc等都被移除掉了。Android又以Bionic 取代Glibc、以Skia
+            取代Cairo、再以opencore取代FFmpeg等等。Android 为了达到商业应用，必须移除被GNU GPL授权证所约束的部份，例如Android将驱动程序移到 Userspace，使得Linux
+            driver 与 Linux kernel彻底分开。Bionic/Libc/Kernel/ 并非标准的Kernel header files。Android 的 Kernel header 是利用工具由 Linux
+            Kernel header 所产生的，这样做是为了保留常数、数据结构与宏。
+            Android 的 Linux kernel控制包括安全（Security），存储器管理（Memory Management），程序管理（Process Management），网络堆栈（Network
+            Stack），驱动程序模型（Driver Model）等。下载Android源码之前，先要安装其构建工具 Repo来初始化源码。Repo 是 Android 用来辅助Git工作的一个工具。</p>
+        <hr>
+    </div>
+    <div class="p">
+        <h4 id="JAVA">JAVA<small></small></h4>
+        <p>
+            Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念.由于C++所具有的优势，该项目组的研究人员首先考虑采用C++来编写程序。但对于硬件资源极其匮乏的单片式系统来说，C++程序过于复杂和庞大。另外由于消费电子产品所采用的嵌入式处理器芯片的种类繁杂，如何让编写的程序跨平台运行也是个难题。为了解决困难，他们首先着眼于语言的开发，假设了一种结构简单、符合嵌入式应用需要的硬件平台体系结构并为其制定了相应的规范，其中就定义了这种硬件平台的二进制机器码指令系统（即后来成为“字节码”的指令系统），以待语言开发成功后，能有半导体芯片生产商开发和生产这种硬件平台。对于新语言的设计，Sun公司研发人员并没有开发一种全新的语言，而是根据嵌入式软件的要求，对C++进行了改造，去除了留在C++的一些不太实用及影响安全的成分，并结合嵌入式系统的实时性要求，开发了一种称为Oak的面向对象语言。</p>
+    </div>
+    <div class="p">
+        <h4 id="PHP">PHP<small><a href="#" onclick="removeSection(this);">
+            &times; 删除该部分</a></small>
+        </h4>
+        <p>PHP（外文名:PHP: Hypertext Preprocessor，中文名：“超文本预处理器”）是一种通用开源脚本语言。在1995年以Personal Home Page Tools (PHP Tools)
+            开始对外发表第一个版本，Lerdorf写了一些介绍此程序的文档。并且发布了PHP1.0！在这的版本中，提供了访客留言本、访客计数器等简单的功能。以后越来越多的网站使用了PHP，并且强烈要求增加一些特性。比如循环语句和数组变量等等；在新的成员加入开发行列之后，Rasmus
+            Lerdorf 在1995年6月8日将 PHP/FI 公开发布，希望可以透过社群来加速程序开发与寻找错误。这个发布的版本命名为 PHP 2，已经有 PHP 的一些雏型，像是类似
+            Perl的变量命名方式、表单处理功能、以及嵌入到 HTML 中执行的能力。程序语法上也类似
+            Perl，有较多的限制，不过更简单、更有弹性。PHP/FI加入了对MySQL的支持，从此建立了PHP在动态网页开发上的地位。到了1996年底，有15000个网站使用 PHP/FI。</p>
+        <hr>
+    </div>
+    <div class="p">
+        <h4 id="Bootstrap">Bootstrap</h4>
+        <p>Bootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。Les</p>
+        <div class="p">
+            <h4 id="MYSQL">MYSQL</h4>
+            <p>MySQL 是最流行的关系型数据库管理系统，在 WEB 应用方面 MySQL 是最好的 RDBMS(Relational Database Management
+                System：关系数据库管理系统)应用软件之一。与其他的大型数据库
+                例如 Oracle、DB2、SQL Server等相比，MySQL [1]
+                自有它的不足之处，但是这丝毫也没有减少它受欢迎的程度。对于一般的个人使用者和中小型企业来说，MySQL提供的功能已经绰绰有余，而且由于 MySQL是开放源码软件，因此可以大大降低总体拥有成本。
+                Linux作为操作系统，Apache 或Nginx作为 Web 服务器，MySQL
+                作为数据库，PHP/Perl/Python作为服务器端脚本解释器。由于这四个软件都是免费或开放源码软件（FLOSS)，因此使用这种方式不用花一分钱（除开人工成本）就可以建立起一个稳定、免费的网站系统，被业界称为“LAMP“或“LNMP”组合。
+            </p>
+        </div>
+    </div>
+    <span id="item" style="color:red;"></span>
+    <script type="text/javascript">
+        $(function () {
+            removeSection = function (e) {
+                $(e).parents(".p").remove();
+                $('[data-spy="scroll"]').each(function () {
+                    var $spy = $(this).scrollspy('refresh')
+                });
+            }
+            $("#myScroll").scrollspy();
+            $('#myScroll').on('activate.bs.scrollspy', function () {
+                var currentItem = $(".nav li.active > a").text();
+                $("#item").html("目前您正在查看 - " + currentItem);
+            })
+        });
+    </script>
+{% endblock %}

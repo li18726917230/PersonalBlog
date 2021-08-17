@@ -1,0 +1,46 @@
+{% extends 'public.html' %}
+{% block public_css_js %}
+    <link rel="stylesheet" href="/static/css/blog_write.css">
+{% endblock %}
+{% block public_title %}
+    我的博客|修改密码
+{% endblock %}
+{% block public %}
+    <div style="padding-top: 1em">
+        <form id="form_btn" method="post" class="form-horizontal col-sm-offset-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="password1" class="col-sm-2 control-label">密码：</label>
+                <div class="col-sm-3">
+                    <input name="password1" class="form_write" type="password1" id="password1"
+                           placeholder="请输入密码" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password2" class="col-sm-2 control-label">再次输入密码：</label>
+                <div class="col-sm-3">
+                    <input name="password2" onblur="password_val()" class="form_write" type="text" id="password2"
+                           placeholder="请再次输入密码" required>
+                    <small id="passwordHelp" class="form-text text-muted"></small>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <p style="text-align: right" id="span_text" class="text-danger ">{{ message }}</p>
+                    <button type="button" class="btn btn-default pull-right" onclick="exit()"
+                            style="margin-right: 10px">退出
+                    </button>
+                    <button type="submit" id="btn" class="btn btn-default pull-right" style="margin-right: 10px">修改
+                    </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        function exit() {
+            window.location.href = '{% url 'home' %}'
+        }
+    </script>
+    <script type="text/javascript" src="/static/js/register.js"></script>
+{% endblock %}

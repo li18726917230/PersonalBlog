@@ -1,0 +1,11 @@
+.form_write {
+    width: 100%;
+    height: 2em;
+    border-left-width: 0px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom:1px solid #c9d8db;
+}
+.form_write:focus{
+    outline: none;
+}

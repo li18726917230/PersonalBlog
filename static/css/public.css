@@ -1,0 +1,15 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+.public {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 4em;
+}
+
+.public-center {
+    text-align: center;
+}

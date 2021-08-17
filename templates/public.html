@@ -1,0 +1,78 @@
+{% load user_tags %}
+{% get_user request.session.user_name as user %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block public_title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/public.css">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    {% block public_css_js %}{% endblock %}
+</head>
+<body data-spy="scroll" data-target="#navbar-example" style="position: relative;" data-offset="65">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">个人博客</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="{% block home_active %}{% endblock %}"><a href="{% url 'home' %}">首页</a></li>
+                <li class="{% block bloglist_active %}{% endblock %}"><a id="bloglist"
+                                                                         href="{% url 'bloglist' %}">博客列表</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.session.user_name == None %}
+                    <li class="{% block login_active %}{% endblock %}"><a
+                            href="{% url 'login' %}">登录</a></li>
+                    <li class="{% block register_active %}{% endblock %}"><a
+                            href="{% url 'register' %}">注册</a></li>
+                {% else %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">欢迎您,{{ user.nickname }}&nbsp;
+                            <img src="{{ user.imagepath }}" alt="头像" class="img-circle"
+                                 style="height: 20px">
+                            &nbsp;
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'blogwrite' %}">写博客</a></li>
+                            <li><a href="{% url 'user_alter' %}">信息修改</a></li>
+                            <li><a href="{% url 'user_adder' %}">信息补充</a></li>
+                            <li><a href="{% url 'pwd_alter' %}">修改密码</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'logout' %}?from={{ request.get_full_path }}">退出登录</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    //返回当前页面
+    $(function () {
+        if ($.cookie('page')) { //判断cookie是否存在
+            $("#bloglist").attr("href", "{% url 'bloglist' %}?page=" + $.cookie('page'))
+        }
+    })
+
+</script>
+<div class="public">
+    {% block public %}{% endblock %}
+</div>
+</body>
+</html>

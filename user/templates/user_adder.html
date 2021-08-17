@@ -1,0 +1,104 @@
+{% extends 'public.html' %}
+{% block public_css_js %}
+    <link rel="stylesheet" href="/static/css/blog_write.css">
+    <script type="text/javascript" src="/static/js/wangEditor.min.js"></script>
+{% endblock %}
+{% block public_title %}
+    我的博客|信息补充
+{% endblock %}
+{% load blog_tags %}
+{% load user_tags %}
+{% get_user request.session.user_name as user %}
+{% block public %}
+    <div style="padding-top: 1em">
+        <form id="form_btn" method="post" class="form-horizontal ">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="the_name" class="col-sm-2 control-label">姓名<span style="color: red">*</span>：</label>
+                <div class="col-sm-8">
+                    <input required name="the_name" value="{{ user_other.the_name }}" class="form_write" type="text"
+                           id="the_name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="age" class="col-sm-2 control-label">年龄<span style="color: red">*</span>：</label>
+                <div class="col-sm-8">
+                    <input name="age" class="form_write" value="{{ user_other.age }}" type="text" id="age"
+                           required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sex" class="col-sm-2 control-label">性别<span style="color: red">*</span>：</label>
+                <div class="col-sm-8">
+                    <select required name="sex" class="form_write">
+                        {% if user_other.sex == '女' %}
+                            <option>男</option>
+                            <option selected>女</option>
+                        {% else %}
+                            <option selected>男</option>
+                            <option>女</option>
+                        {% endif %}
+
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_card" class="col-sm-2 control-label">身份证号：</label>
+                <div class="col-sm-8">
+                    <input name="id_card" class="form_write" type="text" id="id_card" value="{{ user_other.id_card }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="home_add" class="col-sm-2 control-label">家庭住宅：</label>
+                <div class="col-sm-8">
+                    <input name="home_add" class="form_write" type="text" id="home_add"
+                           value="{{ user_other.home_add }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="marital_status" class="col-sm-2 control-label">婚姻状态<span
+                        style="color: red">*</span>：</label>
+                <div class="col-sm-8">
+                    <select required name="marital_status" class="form_write">
+                        {% if user_other.marital_status == '已婚' %}
+                            <option>未婚</option>
+                            <option selected>已婚</option>
+                        {% else %}
+                            <option selected>未婚</option>
+                            <option>已婚</option>
+                        {% endif %}
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="worku_nits" class="col-sm-2 control-label">工作单位：</label>
+                <div class="col-sm-8">
+                    <input name="worku_nits" class="form_write" type="text" id="worku_nits"
+                           value="{{ user_other.worku_nits }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="monthly_income" class="col-sm-2 control-label">月收入(元)：</label>
+                <div class="col-sm-8">
+                    <input name="monthly_income" class="form_write" type="text" id="monthly_income"
+                           value="{{ user_other.monthly_income }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="motto" class="col-sm-2 control-label">座右铭<span style="color: red">*</span>：</label>
+                <div class="col-sm-8">
+                        <textarea class="form-control" id="motto" name="motto" rows="3"
+                                  style="border:1px solid #c9d8db;" required>{{ user_other.motto }}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <span id="span_text" class="text-danger">{{ message }}</span>
+                    <button type="submit" class="btn btn-default pull-right">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
